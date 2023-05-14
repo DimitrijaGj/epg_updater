@@ -1,0 +1,93 @@
+##################################################################
+#    1. kopira ja skriptata vo foldero kaj so e fajlo            #
+#    2. promeni go apsolutnio path na fajlo vo skriptata         #
+#    3. napraj venv i instaliraj request modul                   #
+#    4. setiraj crontab za ekzekucija na skriptata               #
+##################################################################
+
+Podgotovka na skriptata
+
+Definiranje na potrebite
+
+Povlekuvanje na podatoci od URL ednas dnevno
+###
+Python script so modul request da moze da se povika sodrzina od
+ URL
+So opcija write se kreira i podocna se updejtira fajlo
+
+---
+najdobro e da se rabote vo virtuelna enviroment kako sekoj
+ importiran modul bi rabotil so crontab
+pred da se startuva skriptata se pravi venv vo folderot kade 
+skriptata ke se naogja i od kade ke se izvrsuva
+
+so komandite (za Linux Ubuntu):
+'''
+sudo apt update
+sudo apt upgrade
+sudo apt install python3 (dokolku veke nema  se proveruva 
+so komandata python3 -version)
+sudo apt install python3-pip
+pip3 install virtualenv (se instalira virtual envirorment)
+'''
+kreiranje na vevn:
+'''
+virtualenv venv <-ime na venv za poprosto moze da se koriste
+ venv
+'''
+aktiviranje na venv:
+'''
+source venv/bin/activate
+        ^ 
+        ili imeto koe e dadeno na venv pogore
+'''
+za deaktivacija se koriste:
+'''
+deactivate
+'''
+na kraj se instalirat site externi modeli vo ovaj slucaj requests
+'''
+pip3 install requests
+'''
+tuka requests ke bide instaliran samo vo venv i ke moze da se 
+koriste samo od venv
+
+###
+Otkako se ke se naprave ostanuva da se naprave skriptata executabilna
+se vnesuva 
+'''
+sudo chmod +x [ime na skriptata]
+'''
+so +x se dava executable praveo
+
+####
+za kontinuirano avtomatsko izvrsuvanje se koristi crontab
+
+crontab se kreira so komandata crontab -e
+
+se pojavuva editor poveke info tuka https://crontab.guru/
+se pisuva vakva linija 
+* * * * * /Users/dimitrija_gjoshev/Documents/TestSQL/venv/bin/python3 /Users/dimitrija_gjoshev/Documents/TestSQL/epg_updater.py
+
+so zvezdickite se konfigurira inrtervalo koga ke se izvrsuva
+ skriptata vidi crontab.guru
+
+prvio del [/Users/dimitrija_gjoshev/Documents/TestSQL/venv/bin/python3]
+ se dobiva koga vo foldero kaj so e skriptata
+najprvo !!! ke se aktivira vevn!!! i potoa so komandata which python3 k
+e se dobie path na python toa se kopira i se zalepuva kako prv del 
+kazuva koj python da ja izvrse skriptata
+
+vtorio del [/Users/dimitrija_gjoshev/Documents/TestSQL/epg_updater.py] 
+ e apsoluten path na sriptata i se dobiva so 
+vnesuvanje pwd vo foldero na skripta kopira se i na krajo se dopisuva
+ imeto na skriptata
+zacuvuva se
+
+za da se vide dali crontab rabote se koriste
+'''
+tail -f /var/log/syslog | grep cron -i
+'''
+moze da se vide kao se izvrsuva skriptata
+so ls -la se gleda sodrzinata na foldero na strana ima vreme na 
+#modifikacija bi trebalo da se enuva kako skriptata se izvrsuva
