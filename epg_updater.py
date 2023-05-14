@@ -7,8 +7,8 @@ module requests se instalira so comandata pip3 install
 requests"""
 
 url = "http://line.dighub.cc/xmltv.php?"
-username = "username=64035b848807e"
-password="password=659988378b"
+username = "username=.[add user]"
+password="password=[add pass|"
 
 """ user i pass staveni kako variabli za da 
 mozat da se koristat niz kodo bez potreba od 
